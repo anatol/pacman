@@ -92,6 +92,9 @@ int pacman_upgrade(alpm_list_t *targets)
 			goto fail_free;
 		}
 	}
+	if(retval || config->op_s_downloadonly) {
+		goto fail_free;
+	}
 
 	/* Step 1: create a new transaction */
 	if(trans_init(config->flags, 1) == -1) {

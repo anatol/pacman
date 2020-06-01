@@ -733,6 +733,12 @@ static int parsearg_upgrade(int opt)
 		case OP_IGNOREGROUP:
 			parsearg_util_addlist(&(config->ignoregrp));
 			break;
+		case OP_DOWNLOADONLY:
+		case 'w':
+			config->op_s_downloadonly = 1;
+			config->flags |= ALPM_TRANS_FLAG_DOWNLOADONLY;
+			config->flags |= ALPM_TRANS_FLAG_NOCONFLICTS;
+			break;
 		default: return 1;
 	}
 	return 0;
@@ -817,12 +823,6 @@ static int parsearg_sync(int opt)
 		case OP_SYSUPGRADE:
 		case 'u':
 			(config->op_s_upgrade)++;
-			break;
-		case OP_DOWNLOADONLY:
-		case 'w':
-			config->op_s_downloadonly = 1;
-			config->flags |= ALPM_TRANS_FLAG_DOWNLOADONLY;
-			config->flags |= ALPM_TRANS_FLAG_NOCONFLICTS;
 			break;
 		case OP_REFRESH:
 		case 'y':
