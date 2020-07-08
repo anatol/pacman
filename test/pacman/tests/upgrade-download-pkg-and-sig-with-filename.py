@@ -3,7 +3,10 @@ self.description = 'download remote packages with -U with a URL filename'
 addr = self.add_simple_http_server({
     # simple
     '/simple.pkg': 'simple',
-    '/simple.pkg.sig': 'simple.sig',
+    '/simple.pkg.sig': {
+        'headers': { 'Content-Disposition': 'filename="simple.sig-alt' },
+        'body': 'simple.sig',
+    },
 
     # content-disposition filename
     '/cd.pkg': {
@@ -39,6 +42,7 @@ self.addrule('CACHE_FCONTENTS=simple.pkg|simple')
 self.addrule('CACHE_FCONTENTS=simple.pkg.sig|simple.sig')
 
 self.addrule('!CACHE_FEXISTS=cd.pkg')
+self.addrule('!CACHE_FEXISTS=cd.pkg.sig')
 self.addrule('CACHE_FCONTENTS=cd-alt.pkg|cd')
 self.addrule('CACHE_FCONTENTS=cd-alt.pkg.sig|cd.sig')
 
@@ -47,5 +51,7 @@ self.addrule('CACHE_FCONTENTS=redir-dest.pkg|redir-dest')
 self.addrule('CACHE_FCONTENTS=redir-dest.pkg.sig|redir-dest.sig')
 
 self.addrule('!CACHE_FEXISTS=cd-redir.pkg')
+self.addrule('!CACHE_FEXISTS=cd-redir-dest-alt.pkg')
+self.addrule('CACHE_FEXISTS=cd-redir-dest.pkg')
 self.addrule('CACHE_FCONTENTS=cd-redir-dest.pkg|cd-redir-dest')
 self.addrule('CACHE_FCONTENTS=cd-redir-dest.pkg.sig|cd-redir-dest.sig')
