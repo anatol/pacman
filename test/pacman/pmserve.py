@@ -25,9 +25,10 @@ class pmHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
 
     logfile = sys.stderr
 
-    def respond_bytes(self, response, ctype="application/octet-stream", headers={}):
+    def respond_bytes(self, response, ctype="application/octet-stream",
+            headers={}, code=200):
         self.protocol_version = "HTTP/1.1"
-        self.send_response(http.HTTPStatus.OK)
+        self.send_response(code)
         for header, value in headers.items():
             self.send_header(header, value)
         self.send_header("Content-Type", ctype)
@@ -35,8 +36,9 @@ class pmHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(response)
 
-    def respond_string(self, response, headers={}):
-        self.respond_bytes(response.encode('UTF-8'), 'text/plain; charset=utf-8', headers)
+    def respond_string(self, response, headers={}, code=200):
+        self.respond_bytes(response.encode('UTF-8'),
+                'text/plain; charset=utf-8', headers, code)
 
     def log_message(self, format, *args):
         if callable(self.logfile):
@@ -52,11 +54,13 @@ class pmStringHTTPRequestHandler(pmHTTPRequestHandler):
     responses = dict()
 
     def do_GET(self):
-        if self.path in self.responses:
-            response = self.responses[self.path]
+        response = self.responses.get(self.path, self.responses.get(''))
+        if response is not None:
             if isinstance(response, dict):
-                self.respond_string(response.get('body', ''),
-                        response.get('headers', []))
+                self.respond_string(
+                        response.get('body', ''),
+                        headers=response.get('headers', {}),
+                        code=response.get('code', 200))
             else:
                 self.respond_string(response)
         else:

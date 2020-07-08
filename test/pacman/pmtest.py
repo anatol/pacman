@@ -283,7 +283,7 @@ class pmtest(object):
         cmd.extend(shlex.split(self.args))
 
         if not (pacman["gdb"] or pacman["nolog"]):
-            output = open(os.path.join(self.root, util.LOGFILE), 'w')
+            output = open(os.path.join(self.root, util.LOGFILE), 'w+')
         else:
             output = None
         vprint("\trunning: %s" % " ".join(cmd))
@@ -339,7 +339,7 @@ class pmtest(object):
         return os.path.join(self.root, util.PM_HOOKDIR)
 
     def add_simple_http_server(self, responses):
-        logfile = lambda h: open(os.path.join(self.root, 'var/log/httpd.log'), 'w')
+        logfile = lambda h: open(os.path.join(self.root, 'var/log/httpd.log'), 'a')
         handler = type(self.name + 'HTTPServer',
                 (pmserve.pmStringHTTPRequestHandler,),
                 {'responses': responses, 'logfile': logfile})
