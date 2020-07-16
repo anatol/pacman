@@ -9,6 +9,9 @@ addr = self.add_simple_http_server({
         'headers': { 'Content-Disposition': 'filename="cd-alt.pkg"' },
         'body': 'cd'
     },
+    '/cd.pkg/.sig': {
+        'code': 404
+    },
 
     # redirect
     '/redir.pkg/': { 'code': 303, 'headers': { 'Location': '/redir-dest.pkg' } },
