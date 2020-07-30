@@ -602,7 +602,9 @@ static int sync_db_read(alpm_db_t *db, struct archive *archive,
 			} else if(strcmp(line, "%SHA256SUM%") == 0) {
 				READ_AND_STORE(pkg->sha256sum);
 			} else if(strcmp(line, "%PGPSIG%") == 0) {
-				READ_AND_STORE(pkg->base64_sig);
+				if(db->handle->embeddedsigs) {
+					READ_AND_STORE(pkg->base64_sig);
+				}
 			} else if(strcmp(line, "%REPLACES%") == 0) {
 				READ_AND_SPLITDEP(pkg->replaces);
 			} else if(strcmp(line, "%DEPENDS%") == 0) {

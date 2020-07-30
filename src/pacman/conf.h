@@ -111,6 +111,8 @@ typedef struct __config_t {
 	/* conf file options */
 	/* I Love Candy! */
 	unsigned short chomp;
+	/* Use database embedded signatures if present */
+	unsigned short embeddedsigs;
 	/* format target pkg lists as table */
 	unsigned short verbosepkglists;
 	/* When downloading, display the amount downloaded, rate, ETA, and percent

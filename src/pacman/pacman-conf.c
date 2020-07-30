@@ -267,6 +267,7 @@ static void dump_config(void)
 	show_bool("VerbosePkgLists", config->verbosepkglists);
 	show_bool("DisableDownloadTimeout", config->disable_dl_timeout);
 	show_bool("ILoveCandy", config->chomp);
+	show_bool("UseEmbeddedSignatures", config->embeddedsigs);
 	show_bool("NoProgressBar", config->noprogressbar);
 
 	show_int("ParallelDownloads", config->parallel_downloads);
@@ -381,6 +382,8 @@ static int list_directives(void)
 			show_bool("DisableDownloadTimeout", config->disable_dl_timeout);
 		} else if(strcasecmp(i->data, "ILoveCandy") == 0) {
 			show_bool("ILoveCandy", config->chomp);
+		} else if(strcasecmp(i->data, "UseEmbeddedSignatures") == 0) {
+			show_bool("UseEmbeddedSignatures", config->embeddedsigs);
 		} else if(strcasecmp(i->data, "NoProgressBar") == 0) {
 			show_bool("NoProgressBar", config->noprogressbar);
 

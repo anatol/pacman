@@ -294,6 +294,12 @@ int SYMEXPORT alpm_option_get_checkspace(alpm_handle_t *handle)
 	return handle->checkspace;
 }
 
+int SYMEXPORT alpm_option_get_embeddedsigs(alpm_handle_t *handle)
+{
+	CHECK_HANDLE(handle, return -1);
+	return handle->embeddedsigs;
+}
+
 const char SYMEXPORT *alpm_option_get_dbext(alpm_handle_t *handle)
 {
 	CHECK_HANDLE(handle, return NULL);
@@ -751,6 +757,13 @@ int SYMEXPORT alpm_option_set_checkspace(alpm_handle_t *handle, int checkspace)
 {
 	CHECK_HANDLE(handle, return -1);
 	handle->checkspace = checkspace;
+	return 0;
+}
+
+int SYMEXPORT alpm_option_set_embeddedsigs(alpm_handle_t *handle, int embeddedsigs)
+{
+	CHECK_HANDLE(handle, return -1);
+	handle->embeddedsigs = embeddedsigs;
 	return 0;
 }
 

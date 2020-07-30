@@ -214,6 +214,10 @@ Options
 	positive integer. If this config option is not set then only one download
 	stream is used (i.e. downloads happen sequentially).
 
+*UseEmbeddedSignatures*::
+  Enable database embedded signatures usage. If this flag is not set then
+  only detached signatures (*.sig files) are used.
+
 
 Repository Sections
 -------------------

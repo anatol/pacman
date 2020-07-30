@@ -98,6 +98,7 @@ struct __alpm_handle_t {
 	char *arch;              /* Architecture of packages we should allow */
 	int usesyslog;           /* Use syslog instead of logfile? */ /* TODO move to frontend */
 	int checkspace;          /* Check disk space before installing */
+	int embeddedsigs;        /* Use embedded signatures instead of detached one */
 	char *dbext;             /* Sync DB extension */
 	int siglevel;            /* Default signature verification level */
 	int localfilesiglevel;   /* Signature verification level for local file

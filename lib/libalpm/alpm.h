@@ -920,6 +920,9 @@ int alpm_option_set_arch(alpm_handle_t *handle, const char *arch);
 int alpm_option_get_checkspace(alpm_handle_t *handle);
 int alpm_option_set_checkspace(alpm_handle_t *handle, int checkspace);
 
+int alpm_option_get_embeddedsigs(alpm_handle_t *handle);
+int alpm_option_set_embeddedsigs(alpm_handle_t *handle, int embeddedsigs);
+
 const char *alpm_option_get_dbext(alpm_handle_t *handle);
 int alpm_option_set_dbext(alpm_handle_t *handle, const char *dbext);
 

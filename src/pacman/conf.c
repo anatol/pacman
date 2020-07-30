@@ -598,6 +598,9 @@ static int _parse_options(const char *key, char *value,
 		} else if(strcmp(key, "ILoveCandy") == 0) {
 			config->chomp = 1;
 			pm_printf(ALPM_LOG_DEBUG, "config: chomp\n");
+		} else if(strcmp(key, "UseEmbeddedSignatures") == 0) {
+			config->embeddedsigs = 1;
+			pm_printf(ALPM_LOG_DEBUG, "config: embeddedsigs\n");
 		} else if(strcmp(key, "VerbosePkgLists") == 0) {
 			config->verbosepkglists = 1;
 			pm_printf(ALPM_LOG_DEBUG, "config: verbosepkglists\n");
@@ -899,6 +902,7 @@ static int setup_libalpm(void)
 	alpm_option_set_arch(handle, config->arch);
 	alpm_option_set_checkspace(handle, config->checkspace);
 	alpm_option_set_usesyslog(handle, config->usesyslog);
+	alpm_option_set_embeddedsigs(handle, config->embeddedsigs);
 
 	alpm_option_set_ignorepkgs(handle, config->ignorepkg);
 	alpm_option_set_ignoregroups(handle, config->ignoregrp);
